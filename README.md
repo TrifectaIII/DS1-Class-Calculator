@@ -1,5 +1,5 @@
-# DS1-Soul-Level-Calculator
-A tool to calculate the souls necessary to level up in Dark Souls 1.
+# DS1-Class-Calculator
+A tool to calculate the best class based on stat goals in Dark Souls 1.
 
 Created by [Dakota Madden-Fong](https://trifectaiii.github.io/) using information from [this wikidot page](http://darksouls.wikidot.com/soul-level).
 
