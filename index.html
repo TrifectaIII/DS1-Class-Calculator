@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+
+  <title>Class Calculator</title>
+
+  <!-- Favicon from favicon.io -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Skeleton over CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/getskeleton@2.0.4-2/lib/css/skeleton.css">
+
+  <!-- load main CSS file -->
+  <link href="main.css" rel="stylesheet" type="text/css" />
+
+  <!-- cookie.js-florian -->
+  <script src="https://cdn.jsdelivr.net/npm/cookie_js@1.3.0/dist/cookie.umd.min.js"></script>
+</head>
+
+<body>
+  <div class='container'>
+
+    <!-- header for credits -->
+    <div class='headbar row'>
+      <p>Created by
+        <a href='https://trifectaiii.github.io/'>Dakota Madden-Fong</a>
+        using information from
+        <a href='http://darksouls.wikidot.com/classes'>this wikidot page</a>.
+      </p>
+    </div>
+
+    <!-- main contents of page -->
+    <div class='main-page row'>
+      <div class='column'>
+        <h2 class='main-header'>Dark Souls 1<br>Class Calculator</h2>
+
+        <span class='label'>Vitality Goal:</span>
+        <br>
+        <input class='start_level' type='number' placeholder='45'>
+
+        <br><br>
+
+        <span class='label'>Attunement Goal:</span>
+        <br>
+        <input class='goal_level' type='number' placeholder='45'>
+
+        <!-- div will contain output -->
+        <div class='output'></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- load JS files -->
+
+  <!-- object with all class info -->
+  <script src="classes.js"></script>
+
+  <!-- object with all levelup values -->
+  <script src="values.js"></script>
+
+  <!-- main js script -->
+  <script src="main.js"></script>
+</body>
+
+</html>
