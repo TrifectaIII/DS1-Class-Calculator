@@ -55,8 +55,8 @@ console.log(scoreClass(classes.Warrior,{
 
 // use handlebars templating to create all inputs
 var input_template = document.querySelector('.input_template');
-var parse = Handlebars.compile(input_template.innerHTML);
-var compiled = parse({stats_columns:{
+var parser = Handlebars.compile(input_template.innerHTML);
+var compiled = parser({stats_columns:{
     row1:{first:'Vitality',second:'Endurance',third:'Attunement',fourth:'Resistance'},
     row2:{first:'Strength',second:'Dexterity',third:'Intelligence',fourth:'Faith'},
 }});
