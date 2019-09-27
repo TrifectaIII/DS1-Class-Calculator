@@ -28,7 +28,6 @@ var vitality_goal = document.querySelector('.vitality_goal');
 var attunement_goal = document.querySelector('.attunement_goal');
 var output = document.querySelector('.output');
 
-
 var vitalityval = NaN;
 var attunementval = NaN;
 
