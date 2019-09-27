@@ -20,7 +20,7 @@ function scoreClass(classObj,goalsObj, statList) {
 
     //give score for stats which contribute to goals
     statList.forEach(function (stat) {
-        if (!(isNaN(goalsObj[stat]))) {
+        if (!(isNaN(goalsObj[stat])) && goalsObj[stat] > 0) {
             score += Math.min(classObj[stat],goalsObj[stat]);
         }
     });
@@ -56,11 +56,9 @@ console.log(scoreClass(classes.Warrior,{
 // use handlebars templating to create all inputs
 var input_template = document.querySelector('.input_template');
 var parse = Handlebars.compile(input_template.innerHTML);
-var compiled = parse({stats_pair:{
-    a:{first:'Vitality',second:'Attunement'},
-    b:{first:'Endurance',second:'Strength'},
-    c:{first:'Dexterity',second:'Resistance'},
-    d:{first:'Intelligence',second:'Faith'},
+var compiled = parse({stats_columns:{
+    row1:{first:'Vitality',second:'Endurance',third:'Attunement',fourth:'Resistance'},
+    row2:{first:'Strength',second:'Dexterity',third:'Intelligence',fourth:'Faith'},
 }});
 var input_destination = document.querySelector('.input_destination');
 input_destination.innerHTML = compiled;

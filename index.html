@@ -45,36 +45,30 @@
 
         <!-- template for inputs -->
         <template class='input_template'>
-          {{#each stats_pair}}
-          <div class='input_row row'>
-            <div class='input_col six columns'>
-              <span class='input_label'>{{first}} Goal:</span>
-              <br>
-              <input class='{{first}}_goal input' type='number' placeholder='0'>
-              <br><br>
-            </div>
-            <div class='input_col six columns'>
-              <span class='input_label'>{{second}} Goal:</span>
-              <br>
-              <input class='{{second}}_goal input' type='number' placeholder='0'>
-              <br><br>
-            </div>
+          {{#each stats_quad}}
+          <div class='input_col six columns'>
+            <span class='input_label'>{{first}} Goal:</span>
+            <br>
+            <input class='{{first}}_goal input' type='number' placeholder='0'>
+            <br><br>
+            <span class='input_label'>{{second}} Goal:</span>
+            <br>
+            <input class='{{second}}_goal input' type='number' placeholder='0'>
+            <br><br>
+            <span class='input_label'>{{third}} Goal:</span>
+            <br>
+            <input class='{{second}}_goal input' type='number' placeholder='0'>
+            <br><br>
+            <span class='input_label'>{{fourth}} Goal:</span>
+            <br>
+            <input class='{{second}}_goal input' type='number' placeholder='0'>
+            <br><br>
           </div>
           {{/each}}
         </template>
-
+        
         <!-- place for compiled template code -->
         <div class='input_destination'></div>
-
-        <!-- <span class='input_label'>Vitality Goal:</span>
-        <br>
-        <input class='vitality_goal input' type='number' placeholder='0'>
-
-        <br><br>
-
-        <span class='input_label'>Attunement Goal:</span>
-        <br>
-        <input class='attunement_goal input' type='number' placeholder='0'> -->
 
         <!-- div will contain output -->
         <div class='output'></div>
