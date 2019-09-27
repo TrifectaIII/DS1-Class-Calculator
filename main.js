@@ -14,6 +14,22 @@ function formatNum(num) {
     return after;
 }
 
+//calculates stat score based on class and goal objects
+function scoreClass(classObj,goalsObj, statList) {
+    var score = 0;
+
+    //give score for stats which contribute to goals
+    statList.forEach(function (stat) {
+        if (!(isNaN(goalsObj[stat]))) {
+            score += Math.min(classObj[stat],goalsObj[stat]);
+        }
+    });
+
+    //subtract score for SL above 1
+    score -= classObj.SL-1;
+
+    return score;
+}
 
 //generates output 
 function genOutput(div) {
@@ -23,6 +39,19 @@ function genOutput(div) {
 function clearOutput(div) {
     div.innerHTML = '';
 }
+
+var statList = ['Vitality','Attunement','Endurance','Strength','Dexterity','Resistance','Intelligence','Faith'];
+
+console.log(scoreClass(classes.Warrior,{
+    Vitality:0,
+    Attunement:0,
+    Endurance:40,
+    Strength:40,
+    Dexterity:0,
+    Resistance:0,
+    Intelligence:0,
+    Faith:NaN,
+}, statList));
 
 var vitality_goal = document.querySelector('.vitality_goal');
 var attunement_goal = document.querySelector('.attunement_goal');
