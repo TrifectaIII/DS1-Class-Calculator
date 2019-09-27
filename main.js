@@ -1,19 +1,3 @@
-//formats number with commas
-function formatNum(num) {
-    before = num.toString();
-    after = '';
-    counter = 0;
-    for (let i = before.length - 1; i >= 0; i--) {
-        if (counter == 3) {
-            counter = 0;
-            after = ',' + after;
-        }
-        counter += 1;
-        after = before[i] + after;
-    }
-    return after;
-}
-
 //calculates stat score based on class and goal objects
 function scoreClass(classObj,goalsObj, statList) {
     var score = 0;
@@ -36,51 +20,59 @@ function genOutput(div) {
     div.innerHTML = 'genOutput() not implemented yet.';
 }
 
+//clears output
 function clearOutput(div) {
     div.innerHTML = '';
 }
 
 var statList = ['Vitality','Attunement','Endurance','Strength','Dexterity','Resistance','Intelligence','Faith'];
 
-console.log(scoreClass(classes.Warrior,{
-    Vitality:0,
-    Attunement:0,
-    Endurance:40,
-    Strength:40,
-    Dexterity:0,
-    Resistance:0,
-    Intelligence:0,
-    Faith:NaN,
-}, statList));
+// console.log(scoreClass(classes.Warrior,{
+//     Vitality:0,
+//     Attunement:0,
+//     Endurance:40,
+//     Strength:40,
+//     Dexterity:0,
+//     Resistance:0,
+//     Intelligence:0,
+//     Faith:NaN,
+// }, statList));
 
 // use handlebars templating to create all inputs
 var input_template = document.querySelector('.input_template');
 var parser = Handlebars.compile(input_template.innerHTML);
 var compiled = parser({stats_columns:{
-    row1:{first:'Vitality',second:'Endurance',third:'Attunement',fourth:'Resistance'},
-    row2:{first:'Strength',second:'Dexterity',third:'Intelligence',fourth:'Faith'},
+    col1:{first:'Vitality',second:'Endurance',third:'Attunement',fourth:'Resistance'},
+    col2:{first:'Strength',second:'Dexterity',third:'Intelligence',fourth:'Faith'},
 }});
 var input_section = document.querySelector('.input_section');
 input_section.innerHTML = compiled;
 
+//get all inputs
+var inputs = {};
+statList.forEach(function (stat) {
+    inputs[stat] = document.querySelector('.'+stat+'_goal');
+});
 
-//OLD
-var vitality_goal = document.querySelector('.vitality_goal');
-var attunement_goal = document.querySelector('.attunement_goal');
-var output = document.querySelector('.output');
-
-var vitalityval = NaN;
-var attunementval = NaN;
+//init values
+var values = {};
+statList.forEach(function (stat) {
+    values[stat] = NaN;
+});
 
 //get cookie data
-var saved = cookie.get(['vitality','attunement'],'none');
-if (!isNaN(parseInt(saved.vitality))) {
-    vitality_goal.value = saved.vitality;
-}
-if (!isNaN(parseInt(saved.attunement))) {
-    attunement_goal.value = saved.attunement;
-}
+var saved = cookie.get(statList,NaN);
+statList.forEach(function (stat) {
+    //if cookie value was saved, place into input
+    if (!(isNaN(saved[stat]))){
+        inputs[stat].value = saved[stat];
+    }
+});
 
+//get output section
+var output = document.querySelector('.output_section');
+
+//OLD
 
 //Update Output when some inputs are valid
 setInterval(function () {
