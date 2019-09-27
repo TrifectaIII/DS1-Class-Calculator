@@ -53,6 +53,20 @@ console.log(scoreClass(classes.Warrior,{
     Faith:NaN,
 }, statList));
 
+// use handlebars templating to create all inputs
+var input_template = document.querySelector('.input_template');
+var parse = Handlebars.compile(input_template.innerHTML);
+var compiled = parse({stats_pair:{
+    a:{first:'Vitality',second:'Attunement'},
+    b:{first:'Endurance',second:'Strength'},
+    c:{first:'Dexterity',second:'Resistance'},
+    d:{first:'Intelligence',second:'Faith'},
+}});
+var input_destination = document.querySelector('.input_destination');
+input_destination.innerHTML = compiled;
+
+
+//OLD
 var vitality_goal = document.querySelector('.vitality_goal');
 var attunement_goal = document.querySelector('.attunement_goal');
 var output = document.querySelector('.output');

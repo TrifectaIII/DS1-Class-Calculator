@@ -21,6 +21,9 @@
 
   <!-- cookie.js-florian -->
   <script src="https://cdn.jsdelivr.net/npm/cookie_js@1.3.0/dist/cookie.umd.min.js"></script>
+
+  <!-- handlebars.js -->
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@4.3.3/dist/handlebars.min.js"></script>
 </head>
 
 <body>
@@ -40,15 +43,38 @@
       <div class='column'>
         <h2 class='main-header'>Dark Souls 1<br>Class Calculator</h2>
 
-        <span class='input_label'>Vitality Goal:</span>
+        <!-- template for inputs -->
+        <template class='input_template'>
+          {{#each stats_pair}}
+          <div class='input_row row'>
+            <div class='input_col six columns'>
+              <span class='input_label'>{{first}} Goal:</span>
+              <br>
+              <input class='{{first}}_goal input' type='number' placeholder='0'>
+              <br><br>
+            </div>
+            <div class='input_col six columns'>
+              <span class='input_label'>{{second}} Goal:</span>
+              <br>
+              <input class='{{second}}_goal input' type='number' placeholder='0'>
+              <br><br>
+            </div>
+          </div>
+          {{/each}}
+        </template>
+
+        <!-- place for compiled template code -->
+        <div class='input_destination'></div>
+
+        <!-- <span class='input_label'>Vitality Goal:</span>
         <br>
-        <input class='vitality_goal input' type='number' placeholder='45'>
+        <input class='vitality_goal input' type='number' placeholder='0'>
 
         <br><br>
 
         <span class='input_label'>Attunement Goal:</span>
         <br>
-        <input class='attunement_goal input' type='number' placeholder='45'>
+        <input class='attunement_goal input' type='number' placeholder='0'> -->
 
         <!-- div will contain output -->
         <div class='output'></div>
