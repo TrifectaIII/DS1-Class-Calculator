@@ -9,11 +9,11 @@ body {
     margin-bottom:40px;
 }
 
-.label {
+.input_label {
     font-size:large;
 }
 
-.start_level, .goal_level {
+.input {
     font-size: x-large;
     max-width: 100%;
     text-align: center;
