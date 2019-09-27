@@ -41,10 +41,11 @@ var statList = ['Vitality','Attunement','Endurance','Strength','Dexterity','Resi
 // use handlebars templating to create all inputs
 var input_template = document.querySelector('.input_template');
 var parser = Handlebars.compile(input_template.innerHTML);
-var compiled = parser({stats_columns:{
-    col1:{first:'Vitality',second:'Endurance',third:'Attunement',fourth:'Resistance'},
-    col2:{first:'Strength',second:'Dexterity',third:'Intelligence',fourth:'Faith'},
-}});
+var compiled = parser({
+    columns:[['Vitality','Endurance','Attunement','Resistance'], 
+             ['Strength','Dexterity','Intelligence','Faith'],
+            ]
+});
 var input_section = document.querySelector('.input_section');
 input_section.innerHTML = compiled;
 

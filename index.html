@@ -49,24 +49,14 @@
 
         <!-- template for inputs -->
         <template class='input_template'>
-          {{#each stats_columns}}
+          {{#each columns}}
           <div class='input_col six columns'>
-            <span class='input_label'>{{first}} Goal:</span>
+            {{#each this}}
+            <span class='input_label'>{{this}} Goal:</span>
             <br>
-            <input class='{{first}}_goal input' type='number' placeholder='0'>
+            <input class='{{this}}_goal input' type='number' placeholder='0'>
             <br><br>
-            <span class='input_label'>{{second}} Goal:</span>
-            <br>
-            <input class='{{second}}_goal input' type='number' placeholder='0'>
-            <br><br>
-            <span class='input_label'>{{third}} Goal:</span>
-            <br>
-            <input class='{{third}}_goal input' type='number' placeholder='0'>
-            <br><br>
-            <span class='input_label'>{{fourth}} Goal:</span>
-            <br>
-            <input class='{{fourth}}_goal input' type='number' placeholder='0'>
-            <br><br>
+            {{/each}}
           </div>
           {{/each}}
         </template>
