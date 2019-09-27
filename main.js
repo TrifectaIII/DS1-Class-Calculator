@@ -1,9 +1,9 @@
 //calculates stat score based on class and goal objects
-function scoreClass(classObj,goalsObj, statList) {
+function scoreClass(classObj,goalsObj) {
     var score = 0;
 
     //give score for stats which contribute to goals
-    statList.forEach(function (stat) {
+    Object.keys(goalsObj).forEach(function (stat) {
         if (!(isNaN(goalsObj[stat])) && goalsObj[stat] > 0) {
             score += Math.min(classObj[stat],goalsObj[stat]);
         }
@@ -16,7 +16,7 @@ function scoreClass(classObj,goalsObj, statList) {
 }
 
 //generates output 
-function genOutput(div) {
+function genOutput(div, statGoals, classes) {
     div.innerHTML = 'genOutput() not implemented yet.';
 }
 
@@ -27,38 +27,37 @@ function clearOutput(div) {
 
 var statList = ['Vitality','Attunement','Endurance','Strength','Dexterity','Resistance','Intelligence','Faith'];
 
-// console.log(scoreClass(classes.Warrior,{
-//     Vitality:0,
-//     Attunement:0,
-//     Endurance:40,
-//     Strength:40,
-//     Dexterity:0,
-//     Resistance:0,
-//     Intelligence:0,
-//     Faith:NaN,
-// }, statList));
+console.log(scoreClass(classes.Warrior,{
+    Vitality:0,
+    Attunement:0,
+    Endurance:40,
+    Strength:40,
+    Dexterity:40,
+    Resistance:0,
+    Intelligence:0,
+    Faith:NaN,
+}));
 
-// use handlebars templating to create all inputs
+// use handlebars templating to create all statInputs
 var input_template = document.querySelector('.input_template');
 var parser = Handlebars.compile(input_template.innerHTML);
 var compiled = parser({
     columns:[['Vitality','Endurance','Attunement','Resistance'], 
-             ['Strength','Dexterity','Intelligence','Faith'],
-            ]
+             ['Strength','Dexterity','Intelligence','Faith'],],
 });
 var input_section = document.querySelector('.input_section');
 input_section.innerHTML = compiled;
 
-//get all inputs
-var inputs = {};
+//get all statInputs
+var statInputs = {};
 statList.forEach(function (stat) {
-    inputs[stat] = document.querySelector('.'+stat+'_goal');
+    statInputs[stat] = document.querySelector('.'+stat+'_goal');
 });
 
-//init values
-var values = {};
+//init statGoals
+var statGoals = {};
 statList.forEach(function (stat) {
-    values[stat] = NaN;
+    statGoals[stat] = NaN;
 });
 
 //get cookie data
@@ -66,31 +65,50 @@ var saved = cookie.get(statList,NaN);
 statList.forEach(function (stat) {
     //if cookie value was saved, place into input
     if (!(isNaN(saved[stat]))){
-        inputs[stat].value = saved[stat];
+        statInputs[stat].value = saved[stat];
     }
 });
 
 //get output section
 var output = document.querySelector('.output_section');
 
-//OLD
+//function to check if input values have changed
+function anyChange (statInputs, statGoals) {
+    for (let stat in statGoals) {
+        if (parseInt(statInputs[stat].value) != statGoals[stat]) {
+            return true;
+        }
+    }
+    return false;
+}
 
-//Update Output when some inputs are valid
+//sets all statGoals to new input statGoals, cookies too
+function setValues (statInputs, statGoals) {
+    for (let stat in statGoals) {
+        statGoals[stat] = parseInt(statInputs[stat].value)
+        cookie.set(stat,statGoals[stat],{expires:7});
+    }
+}
+
+function anyValid (statGoals) {
+    for (let stat in statGoals) {
+        if (!(isNaN(statGoals[stat])) && statGoals[stat] > 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+//Update Output when some statInputs are valid
 setInterval(function () {
-    //only check when inputs change
-    if (vitalityval != parseInt(vitality_goal.value) || attunementval != parseInt(attunement_goal.value)) {
-        vitalityval = parseInt(vitality_goal.value);
-        attunementval = parseInt(attunement_goal.value);
-
-        //save new values to cookie
-        cookie.set('vitality',vitalityval,{expires:7});
-        cookie.set('attunement',attunementval,{expires:7});
-
-        //generate new output if some ar ints, will ignore others
-        if (!isNaN(vitalityval) || !isNaN(attunementval)){
-            genOutput(output);
+    //only check when statInputs change
+    if (anyChange(statInputs,statGoals)) {
+        //when change, set statGoals and cookies
+        setValues(statInputs,statGoals);
+        if (anyValid(statGoals)) {
+            genOutput(output, statGoals, classes);
         } else {
             clearOutput(output);
         }
-    };
+    }
 }, 250);
