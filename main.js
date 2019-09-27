@@ -60,8 +60,8 @@ var compiled = parse({stats_columns:{
     row1:{first:'Vitality',second:'Endurance',third:'Attunement',fourth:'Resistance'},
     row2:{first:'Strength',second:'Dexterity',third:'Intelligence',fourth:'Faith'},
 }});
-var input_destination = document.querySelector('.input_destination');
-input_destination.innerHTML = compiled;
+var input_section = document.querySelector('.input_section');
+input_section.innerHTML = compiled;
 
 
 //OLD
