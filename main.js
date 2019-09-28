@@ -104,11 +104,14 @@ function anyChange (statInputs, statGoals) {
 }
 
 //sets all statGoals to new input statGoals, cookies too
-//also force over 99 back to 99
+//also force over 99 back to 99, 0 to 0
 function setValues (statInputs, statGoals) {
     for (let stat in statGoals) {
         if (parseInt(statInputs[stat].value) > 99) {
             statInputs[stat].value = 99;
+        }
+        if (parseInt(statInputs[stat].value) < 0) {
+            statInputs[stat].value = 0;
         }
         statGoals[stat] = parseInt(statInputs[stat].value);
         cookie.set(stat,statGoals[stat],{expires:7});
