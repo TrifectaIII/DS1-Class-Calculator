@@ -10,6 +10,7 @@ body {
 .main-header{
     margin-top:30px;
     margin-bottom:40px;
+    font-weight: bold;
 }
 
 .input_label {
