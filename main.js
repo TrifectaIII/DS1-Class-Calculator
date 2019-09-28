@@ -1,37 +1,51 @@
 //calculates stat score based on class and goal objects
-function scoreClass(classObj,goalsObj) {
+function calcClass(classObj,goalsObj) {
     var score = 0;
+    var final_level = classObj.SL;
 
     //give score for stats which contribute to goals
     Object.keys(goalsObj).forEach(function (stat) {
         if (!(isNaN(goalsObj[stat])) && goalsObj[stat] > 0) {
-            score += Math.min(classObj[stat],goalsObj[stat]);
+            if (classObj[stat] < goalsObj[stat]) {
+                score += classObj[stat];
+                final_level += goalsObj[stat] - classObj[stat];
+            } else {
+                score += goalsObj[stat];
+            }
         }
     });
 
     //subtract score for SL above 1
     score -= classObj.SL-1;
 
-    return score;
+    return {score:score, final_level:final_level};
 }
 
 //generates output 
-function genOutput(div, statGoals, classes) {
-    var topScore = -9999;
+function genOutput(div, parser, statGoals, classes) {
+    var topScore = 0;
     var topClass = [];
+    var minLevel;
 
     for (let className in classes) {
-        var score = scoreClass(classes[className], statGoals);
-        if (score > topScore) {
-            topScore = score;
+        //compare each class with goals
+        var compare = calcClass(classes[className], statGoals);
+
+
+        if (compare.score > topScore) {
+            topScore = compare.score;
             topClass = [className];
-        } else if (score == topScore) {
+            minLevel = compare.final_level;
+        } else if (compare.score == topScore) {
             topClass.push(className);
         }
     }
 
-
-    div.innerHTML = topClass;
+    div.innerHTML = parser({
+        SL:minLevel,
+        classes:topClass.join(', '),
+        many:(topClass.length > 0)
+    });
 }
 
 //clears output
@@ -41,26 +55,12 @@ function clearOutput(div) {
 
 var statList = ['Vitality','Attunement','Endurance','Strength','Dexterity','Resistance','Intelligence','Faith'];
 
-console.log(scoreClass(classes.Warrior,{
-    Vitality:0,
-    Attunement:0,
-    Endurance:40,
-    Strength:40,
-    Dexterity:40,
-    Resistance:0,
-    Intelligence:0,
-    Faith:NaN,
-}));
-
 // use handlebars templating to create all statInputs
-var input_template = document.querySelector('.input_template');
-var parser = Handlebars.compile(input_template.innerHTML);
-var compiled = parser({
+var input_parser = Handlebars.compile(document.querySelector('.input_template').innerHTML);
+document.querySelector('.input_section').innerHTML = input_parser({
     columns:[['Vitality','Endurance','Attunement','Resistance'], 
-             ['Strength','Dexterity','Intelligence','Faith'],],
+             ['Strength','Dexterity','Intelligence','Faith']],
 });
-var input_section = document.querySelector('.input_section');
-input_section.innerHTML = compiled;
 
 //get all statInputs
 var statInputs = {};
@@ -84,6 +84,7 @@ statList.forEach(function (stat) {
 });
 
 //get output section
+var output_parser = Handlebars.compile(document.querySelector('.output_template').innerHTML);
 var output = document.querySelector('.output_section');
 
 //function to check if input values have changed
@@ -97,8 +98,12 @@ function anyChange (statInputs, statGoals) {
 }
 
 //sets all statGoals to new input statGoals, cookies too
+//also force over 99 back to 99
 function setValues (statInputs, statGoals) {
     for (let stat in statGoals) {
+        if (parseInt(statInputs[stat].value) > 99) {
+            statInputs[stat].value = 99;
+        }
         statGoals[stat] = parseInt(statInputs[stat].value);
         cookie.set(stat,statGoals[stat],{expires:7});
     }
@@ -120,9 +125,16 @@ setInterval(function () {
         //when change, set statGoals and cookies
         setValues(statInputs,statGoals);
         if (anyValid(statGoals)) {
-            genOutput(output, statGoals, classes);
+            genOutput(output, output_parser, statGoals, classes);
         } else {
             clearOutput(output);
         }
     }
 }, 250);
+
+// reset button
+document.querySelector('.reset_button').addEventListener('click', function () {
+    for (let stat in statInputs) {
+        statInputs[stat].value = '';
+    }
+});
