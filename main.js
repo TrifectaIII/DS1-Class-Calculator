@@ -64,8 +64,10 @@ var statList = ['Vitality','Attunement','Endurance','Strength','Dexterity','Resi
 // use handlebars templating to create all statInputs
 var input_parser = Handlebars.compile(document.querySelector('.input_template').innerHTML);
 document.querySelector('.input_section').innerHTML = input_parser({
-    columns:[['Vitality','Endurance','Attunement','Resistance'], 
-             ['Strength','Dexterity','Intelligence','Faith']],
+    columns:[['Vitality','Endurance'],
+            ['Strength','Dexterity'],
+            ['Intelligence','Faith'],
+            ['Attunement','Resistance']],
 });
 
 //get all statInputs
