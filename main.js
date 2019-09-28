@@ -120,6 +120,7 @@ function setValues (statInputs, statGoals) {
     }
 }
 
+//checks if at least 1 of the inputs has a valid value
 function anyValid (statGoals) {
     for (let stat in statGoals) {
         if (!(isNaN(statGoals[stat])) && statGoals[stat] > 0) {
