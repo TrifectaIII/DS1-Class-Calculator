@@ -17,7 +17,21 @@ function scoreClass(classObj,goalsObj) {
 
 //generates output 
 function genOutput(div, statGoals, classes) {
-    div.innerHTML = 'genOutput() not implemented yet.';
+    var topScore = -9999;
+    var topClass = [];
+
+    for (let className in classes) {
+        var score = scoreClass(classes[className], statGoals);
+        if (score > topScore) {
+            topScore = score;
+            topClass = [className];
+        } else if (score == topScore) {
+            topClass.push(className);
+        }
+    }
+
+
+    div.innerHTML = topClass;
 }
 
 //clears output
