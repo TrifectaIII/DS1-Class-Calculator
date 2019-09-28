@@ -41,9 +41,15 @@ function genOutput(div, parser, statGoals, classes) {
         }
     }
 
+    var classLinks = {};
+
+    topClass.forEach(function (className) {
+        classLinks[className] = classes[className].link;
+    });
+
     div.innerHTML = parser({
         SL:minLevel,
-        classes:topClass.join(', '),
+        classlinks:classLinks,
         many:(topClass.length > 0)
     });
 }

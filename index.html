@@ -48,7 +48,7 @@
         <h2 class='main-header'>Dark Souls 1<br>Class Calculator</h2>
 
         <button class='reset_button'>RESET</button>
-        
+
         <!-- template for inputs -->
         <template class='input_template'>
           {{#each columns}}
@@ -75,7 +75,11 @@
             This class will reach your build goals at SL <b>{{SL}}</b>:
             {{/if}}
             <br>
-            <b>{{classes}}</b>.
+            <b>
+              {{#each classlinks}}
+              <a href='{{this}}'>{{@key}}</a><br>
+              {{/each}}
+            </b>
           </p>
         </template>
 

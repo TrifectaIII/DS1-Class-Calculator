@@ -18,7 +18,7 @@ body {
     text-align: center;
 }
 
-.output_section > p {
+.output_section p {
     font-size:x-large;
     margin-top:50px;
 }
@@ -46,18 +46,22 @@ td {
     margin:auto;
 }
 
-.headbar a:link {
+.headbar a:link,
+.output_section a:link {
     text-decoration: none;
 }
 
-.headbar a:visited {
+.headbar a:visited,
+.output_section a:visited {
     text-decoration: none;
 }
 
-.headbar a:hover {
+.headbar a:hover,
+.output_section a:hover {
     text-decoration: underline;
 }
 
-.headbar a:active {
+.headbar a:active,
+.output_section a:active {
     text-decoration: underline;
 }
