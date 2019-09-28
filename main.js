@@ -99,7 +99,7 @@ function anyChange (statInputs, statGoals) {
 //sets all statGoals to new input statGoals, cookies too
 function setValues (statInputs, statGoals) {
     for (let stat in statGoals) {
-        statGoals[stat] = parseInt(statInputs[stat].value)
+        statGoals[stat] = parseInt(statInputs[stat].value);
         cookie.set(stat,statGoals[stat],{expires:7});
     }
 }
