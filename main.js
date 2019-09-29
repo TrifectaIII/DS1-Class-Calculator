@@ -50,7 +50,7 @@ function genOutput(div, parser, statGoals, classes) {
     div.innerHTML = parser({
         SL:minLevel,
         classlinks:classLinks,
-        many:(topClass.length > 0)
+        many:(topClass.length > 1)
     });
 }
 
