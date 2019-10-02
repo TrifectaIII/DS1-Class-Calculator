@@ -46,14 +46,6 @@ table, th, td {
     text-align: left;
 }
 
-td {
-    font-size:85%;
-}
-
-.headbar span {
-    margin:auto;
-}
-
 .headbar a:link,
 .output_section a:link {
     text-decoration: none;
