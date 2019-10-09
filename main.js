@@ -145,8 +145,14 @@ setInterval(function () {
 }, 250);
 
 // reset button
-document.querySelector('.reset_button').addEventListener('click', function () {
+var reset_button = document.querySelector('.reset_button');
+
+//button setup
+reset_button.addEventListener('click', function () {
     for (let stat in statInputs) {
         statInputs[stat].value = '';
     }
 });
+
+//remove button from tab order
+reset_button.tabIndex = -1;
