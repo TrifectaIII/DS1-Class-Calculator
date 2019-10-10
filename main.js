@@ -98,7 +98,9 @@ var output = document.querySelector('.output_section');
 //function to check if input values have changed
 function anyChange (statInputs, statGoals) {
     for (let stat in statGoals) {
-        if (parseInt(statInputs[stat].value) != statGoals[stat]) {
+        let inputVal = parseInt(statInputs[stat].value);
+        let savedVal = statGoals[stat];
+        if (inputVal != savedVal && (!isNaN(inputVal) || !isNaN(savedVal))) {
             return true;
         }
     }
@@ -156,3 +158,4 @@ reset_button.addEventListener('click', function () {
 
 //remove button from tab order
 reset_button.tabIndex = -1;
+
