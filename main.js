@@ -52,6 +52,11 @@ function genOutput(div, parser, statGoals, classes) {
         classinfo:classInfo,
         many:(topClass.length > 1)
     });
+
+    //remove classs links from tab order
+    document.querySelectorAll('.class_link').forEach(function (link) {
+        link.tabIndex = -1;
+    });
 }
 
 //clears output
@@ -159,3 +164,7 @@ reset_button.addEventListener('click', function () {
 //remove button from tab order
 reset_button.tabIndex = -1;
 
+//remove links from tab order
+document.querySelectorAll('a').forEach(function (link) {
+    link.tabIndex = -1;
+});
