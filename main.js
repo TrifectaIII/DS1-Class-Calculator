@@ -54,9 +54,9 @@ function genOutput(div, parser, statGoals, classes) {
     });
 
     //remove classs links from tab order
-    document.querySelectorAll('.class_link').forEach(function (link) {
-        link.tabIndex = -1;
-    });
+    // document.querySelectorAll('.class_link').forEach(function (link) {
+    //     link.tabIndex = -1;
+    // });
 }
 
 //clears output
