@@ -50,7 +50,7 @@
     <!-- main contents of page -->
     <div class='main-section row'>
       <div class='column'>
-        <h2 class='main-header'>Dark Souls 1<br>Class Calculator</h2>
+        <h2 class='main-header dm-white'>Dark Souls 1<br>Class Calculator</h2>
         <hr>
         <button class='reset_button'>RESET</button>
         <br><br>
@@ -60,7 +60,7 @@
           {{#each columns}}
           <div class='input_col three columns'>
             {{#each this}}
-            <span class='input_label'>{{this}} Goal:</span>
+            <span class='input_label dm-white'>{{this}} Goal:</span>
             <br>
             <input class='{{this}}_goal input' type='number' placeholder='0'>
             <br><br>
@@ -76,9 +76,9 @@
         <template class='output_template'>
           <p>
             {{#if many}}
-            These classes will reach your build goals the fastest, at SL <b>{{SL}}</b>:
+            These classes will reach your build goals the fastest, at SL <b class='dm-white'>{{SL}}</b>:
             {{else}}
-            This class will reach your build goals the fastest, at SL <b>{{SL}}</b>:
+            This class will reach your build goals the fastest, at SL <b class='dm-white'>{{SL}}</b>:
             {{/if}}
             <br>
             <b>
