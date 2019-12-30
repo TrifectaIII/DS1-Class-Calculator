@@ -1,18 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap');
-
-* {
-    font-family: 'Lexend Deca', sans-serif;
-}
-
-body {
-    text-align: center;
-    max-width: 100%;
-    background-color:white;
-}
-
 .main-header{
-    margin-top:30px;
-    margin-bottom:40px;
     font-weight: bold;
 }
 
@@ -44,24 +30,4 @@ table {
 
 table, th, td {
     text-align: left;
-}
-
-.headbar a:link,
-.output_section a:link {
-    text-decoration: none;
-}
-
-.headbar a:visited,
-.output_section a:visited {
-    text-decoration: none;
-}
-
-.headbar a:hover,
-.output_section a:hover {
-    text-decoration: underline;
-}
-
-.headbar a:active,
-.output_section a:active {
-    text-decoration: underline;
 }
