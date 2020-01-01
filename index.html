@@ -56,7 +56,7 @@
         <br><br>
 
         <!-- template for inputs -->
-        <template class='input_template'>
+        <script class="input_template" type="text/template">
           {{#each columns}}
           <div class='input_col three columns'>
             {{#each this}}
@@ -67,13 +67,13 @@
             {{/each}}
           </div>
           {{/each}}
-        </template>
+        </script>
 
         <!-- place for compiled template code -->
         <div class='input_section row'></div>
 
         <!-- template for output -->
-        <template class='output_template'>
+        <script class="output_template" type="text/template">
           <p>
             {{#if many}}
             These classes will reach your build goals the fastest, at SL <b class='dm-white'>{{SL}}</b>:
@@ -87,7 +87,7 @@
               {{/each}}
             </b>
           </p>
-        </template>
+        </script>
 
         <!-- div will contain output -->
         <div class='output_section'></div>
