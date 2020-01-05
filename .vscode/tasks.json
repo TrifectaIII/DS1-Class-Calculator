@@ -6,7 +6,10 @@
         {
             "label": "http_server",
             "type": "shell",
-            "command": "python -m http.server 8002",
+            "command": "python3 -m http.server 8002",
+            "windows": {
+                "command":"python -m http.server 8002"
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
